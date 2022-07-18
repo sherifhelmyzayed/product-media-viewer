@@ -2,10 +2,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'OrbitControls'
 import pairCollection from './product-media-viewer/index.js'
-import { eventListers } from './product-media-viewer/actionControl.js'
-
-
-console.log("index works");
+import { imageContainer, setBtn, viewBtn } from './product-media-viewer/actionControl.js'
 
 
 
@@ -90,5 +87,22 @@ animate();
 
 const mediaCollection = new pairCollection
 
-eventListers(mediaCollection, camera, controls)
+imageContainer(mediaCollection)
 
+
+
+/////////////////////////////////////////////////////////////////////
+//////////////////// BUTTONS ACTIVITIES START ///////////////////////
+/////////////////////////////////////////////////////////////////////
+
+
+// view button event listener
+document.querySelector('#viewBtn').addEventListener('click', () => (viewBtn(mediaCollection, camera, controls)))
+
+// set button event listener
+document.querySelector('#setBtn').addEventListener('click', () => (setBtn(mediaCollection, camera)))
+
+
+/////////////////////////////////////////////////////////////////////
+//////////////////// BUTTONS ACTIVITIES ENDS  ///////////////////////
+/////////////////////////////////////////////////////////////////////

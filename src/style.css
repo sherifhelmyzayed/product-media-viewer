@@ -24,7 +24,7 @@ canvas {
 
 .viewer-container {
     position: fixed;
-    bottom: -150px;
+    bottom: 0;
     height: 150px;
     width: 100vw;
     background-color: aliceblue;
@@ -61,22 +61,21 @@ canvas {
 }
 
 .icon-text {
-    text-align: center;
+    text-align: right;
     font-size: 12px;
-    margin-bottom: 30px;
+    margin-bottom: 0px;
     margin-top: 0px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     transition: all ease 0.5s;
     position: relative;
-    left: 100px;
 }
 
 .icon.view {
     border: none !important;
     padding: 10px 10px !important;
     position: relative;
-    left: 100px;
     transition: all ease 0.2s;
+    cursor: pointer;
 }
 
 .icon.view.disable {
@@ -86,10 +85,10 @@ canvas {
 
 .icon.set{
     border: none !important;
-    padding: 10px 0px 10px 12px !important;
+    padding: 10px 10px 10px 12px !important;
     position: relative;
-    left: 100px;
     transition: all ease 0.4s;
+    cursor: pointer;
 }
 
 .icon.set.disable {
@@ -104,6 +103,7 @@ canvas {
 
 .cards {
     width: calc(100vw - 150px);
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -130,43 +130,38 @@ canvas {
 
 .display-image {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: calc(100vh - 150px);
+    top: 20px;
+    right: 20px;
+    width: 200px;
+    height: 200px;
     background-color: rgba(97, 97, 97, 0.322);
-    pointer-events: none;
     display: flex;
     justify-content: center;
-    opacity: 0;
+    align-items: center;
     transition: all ease-in-out 1s;
 }
 
 .display-image img{
-    height: calc(100vh - 150px);
-    opacity: 0.5;
+    display: block;
+
+    max-width:200px;
+    max-height:200px;
+    width: auto;
+    height: auto;
     pointer-events: none;
 
 }
 
 .control-buttons {
-    position: fixed;
-    right: 50px;
-    bottom: 170px;
+    position: absolute;
+    bottom: -70px;
     cursor: pointer;
     z-index: 5;
     display: flex;
-    flex-direction: column;
     justify-content: center;
+    align-content: center;
 }
 
-.control-buttons.hide {
-    display: none;
-}
-
-.control-buttons .inactive {
-    pointer-events: none;
-}
 
 
 .drag-area{

@@ -7,7 +7,7 @@ class pairCollection {
     ];
 
     setPair(mediaID, pov) {
-        if (mediaID === undefined || pov === undefined) throw RangeError();
+        if (mediaID === undefined && pov === undefined) throw RangeError();
 
         // checks if mediaID exists in pov pairs
         const filteredItem = this.#povPairs.find((item) => (item.mediaID === mediaID))

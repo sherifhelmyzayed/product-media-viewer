@@ -1,11 +1,10 @@
 import { gsap } from 'gsap'
 
-export const eventListers = (mediaCollection, camera, controls) => {
+/////////////////////////////////////////////////////////////////////
+//////////////////// IMAGE  CONTAINER START  ////////////////////////
+/////////////////////////////////////////////////////////////////////
 
-    /////////////////////////////////////////////////////////////////////
-    //////////////////// IMAGE  CONTAINER START  ////////////////////////
-    /////////////////////////////////////////////////////////////////////
-
+export const imageContainer = (mediaCollection) => {
     const imageContainer = document.getElementsByClassName('image-container')[0];
 
     //selecting all required elements
@@ -41,8 +40,6 @@ export const eventListers = (mediaCollection, camera, controls) => {
         addFile();
     });
 
-
-
     const addFile = () => {
         for (let i = 0; i < file.length; i++) {
             let fileReader = new FileReader();
@@ -55,7 +52,9 @@ export const eventListers = (mediaCollection, camera, controls) => {
                 `)
                     const thumbnailImages = document.getElementsByClassName('thumbnail-img')
                     for (let i = 0; i < thumbnailImages.length; i++) {
-                        thumbnailImages[i].addEventListener('click', () => (thumbnailClick()))
+                        thumbnailImages[i].addEventListener('click', () => (
+                            thumbnailClick(mediaCollection))
+                        )
                     }
                     mediaCollection.setPair(
                         uniqueId, ''
@@ -70,122 +69,60 @@ export const eventListers = (mediaCollection, camera, controls) => {
     }
 
 
+}
 
     /////////////////////////////////////////////////////////////////////
     //////////////////// IMAGE  CONTAINER  ENDS  ////////////////////////
     /////////////////////////////////////////////////////////////////////
 
 
-
-    /////////////////////////////////////////////////////////////////////
-    //////////////////// BUTTONS ACTIVITIES START ///////////////////////
-    /////////////////////////////////////////////////////////////////////
-
-    const viewerContainer = document.getElementsByClassName('viewer-container')[0]
+export const thumbnailClick = (mediaCollection) => {
     const thumbnailImages = document.getElementsByClassName('thumbnail-img')
     const previewImage = document.querySelector('.display-image img')
-    const viewBtnIcon = document.querySelector('.icon.view')
     const setBtnIcon = document.querySelector('.icon.set')
-    let selectedID
+    const viewBtnIcon = document.querySelector('.icon.view')
+    previewImage.setAttribute('src', event.target.getAttribute('src'))
+    for (let i = 0; i < thumbnailImages.length; i++) {
+        thumbnailImages[i].classList.remove('active')
+    }
+    event.target.classList.add('active')
+    const selectedID = parseInt(event.target.getAttribute('imageId'))
+    viewBtnIcon.classList.remove('disable')
+    setBtnIcon.classList.remove('disable')
+    viewBtnIcon.setAttribute('imageId', selectedID)
+    setBtnIcon.setAttribute('imageId', selectedID)
+    if (!mediaCollection.getPov(selectedID).pov) {
+        viewBtnIcon.classList.add('disable')
+    }
+}
 
-    const thumbnailClick = () => {
-        console.log("works");
-        previewImage.setAttribute('src', event.target.getAttribute('src'))
-        for (let i = 0; i < thumbnailImages.length; i++) {
-            thumbnailImages[i].classList.remove('active')
+export const viewBtn = (mediaCollection, camera, controls) => {
+    const selectedID = parseInt(document.querySelector('#viewBtn').parentElement.getAttribute('imageId'))
+    let newCamPos = mediaCollection.getPov(selectedID).pov
+    if (selectedID && newCamPos) {
+        gsap.to(camera.position, {
+            duration: 1,
+            ease: 'easeOut',
+            x: newCamPos.position[0],
+            y: newCamPos.position[1],
+            z: newCamPos.position[2],
+            onUpdate: function () {
+                camera.lookAt({ x: 0, y: 0, z: 0 })
+                camera.updateProjectionMatrix();
+                controls.update();
+            },
+        });
+    }
+}
+export const setBtn = (mediaCollection, camera) => {
+    const selectedID = parseInt(document.querySelector('#setBtn').parentElement.getAttribute('imageId'))
+    const viewBtnIcon = document.querySelector('.icon.view')
+    viewBtnIcon.classList.remove('disable')
+    mediaCollection.setPair(
+        selectedID,
+        {
+            position: [camera.position.x, camera.position.y, camera.position.z],
+            rotation: [camera.rotation._x, camera.rotation._y, camera.rotation._z]
         }
-        event.target.classList.add('active')
-        selectedID = parseInt(event.target.getAttribute('imageId'))
-        viewBtnIcon.classList.remove('disable')
-        setBtnIcon.classList.remove('disable')
-        if (!mediaCollection.getPov(selectedID).pov) {
-            viewBtnIcon.classList.add('disable')
-        }
-
-    }
-
-
-    const viewBtn = () => {
-        let newCamPos = mediaCollection.getPov(selectedID).pov
-        if (selectedID && newCamPos) {
-            gsap.to(camera.position, {
-                duration: 1,
-                ease: 'easeOut',
-                x: newCamPos.position[0],
-                y: newCamPos.position[1],
-                z: newCamPos.position[2],
-                onUpdate: function () {
-                    camera.lookAt({ x: 0, y: 0, z: 0 })
-                    camera.updateProjectionMatrix();
-                    controls.update();
-                },
-                onComplete: () => {
-                    console.log("completed");
-                }
-            });
-
-
-        }
-
-    }
-    const setBtn = () => {
-        viewBtnIcon.classList.remove('disable')
-        mediaCollection.setPair(
-            selectedID,
-            {
-                position: [camera.position.x, camera.position.y, camera.position.z],
-                rotation: [camera.rotation._x, camera.rotation._y, camera.rotation._z]
-            }
-        );
-    }
-
-
-    const openBtnIcon = document.querySelector('.icon.open')
-    const closeBtnIcon = document.querySelector('.icon.close')
-    const controlButtons = document.querySelectorAll('.control-buttons .icon')
-    const iconText = document.querySelectorAll('.icon-text')
-
-    const closeBtn = () => {
-        
-        previewImage.parentElement.style.opacity = '0';
-        selectedID = null;
-        closeBtnIcon.style.display = 'none';
-        openBtnIcon.style.display = 'block';
-        controlButtons[0].style.left = '100px';
-        controlButtons[1].style.left = '100px';
-        iconText[0].style.left = '100px';
-        iconText[1].style.left = '100px';
-        viewerContainer.style.bottom = '-150px'
-    }
-
-    const openBtn = () => {
-        previewImage.parentElement.style.opacity = '1';
-        closeBtnIcon.style.display = 'block';
-        openBtnIcon.style.display = 'none';
-        controlButtons[0].style.left = '0';
-        controlButtons[1].style.left = '0';
-        iconText[0].style.left = '0';
-        iconText[1].style.left = '0';
-        viewerContainer.style.bottom = '0'
-    }
-
-
-
-    /////////////////////////////////////////////////////////////////////
-    //////////////////// BUTTONS ACTIVITIES ENDS  ///////////////////////
-    /////////////////////////////////////////////////////////////////////
-
-
-    console.log(mediaCollection.setPair(123456, [123]));
-
-    const setS = () => {
-        console.log("SDDSD")
-    }
-
-
-
-    document.querySelector('#closeBtn').addEventListener('click', () => (closeBtn()))
-    document.querySelector('#openBtn').addEventListener('click', () => (openBtn()))
-    document.querySelector('#viewBtn').addEventListener('click', () => (viewBtn()))
-    document.querySelector('#setBtn').addEventListener('click', () => (setBtn()))
+    );
 }
