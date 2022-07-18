@@ -1,0 +1,218 @@
+*,
+*::before,
+
+
+body {
+    margin: 0;
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+}
+
+
+
+/* viewer Starts */
+.viewer-button {
+    position: fixed;
+    right: 50px;
+    top: 30px;
+    cursor: pointer;
+    z-index: 5;
+}
+
+.viewer-container {
+    position: fixed;
+    bottom: -150px;
+    height: 150px;
+    width: 100vw;
+    background-color: aliceblue;
+    display: flex;
+    align-items: center;
+    transition: bottom ease 0.5s;
+}
+
+.image-container {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.icon {
+    font-size: 20px;
+    color: rgb(61, 41, 177);
+    margin-top: 10px;
+    border:1px solid rgb(61, 41, 177);
+    border-radius: 50px;
+    padding: 5px 10px;
+    transition: color border ease-in-out 0.2s;
+}
+
+.icon:hover {
+    background-color: white;
+    color: black;
+    border-color: black;
+    transition: background-color ease-in-out 0.2s;
+}
+
+.icon-text {
+    text-align: center;
+    font-size: 12px;
+    margin-bottom: 30px;
+    margin-top: 0px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    transition: all ease 0.5s;
+    position: relative;
+    left: 100px;
+}
+
+.icon.view {
+    border: none !important;
+    padding: 10px 10px !important;
+    position: relative;
+    left: 100px;
+    transition: all ease 0.2s;
+}
+
+.icon.view.disable {
+    color: #7a7a7a !important;
+    pointer-events: none !important;
+}
+
+.icon.set{
+    border: none !important;
+    padding: 10px 0px 10px 12px !important;
+    position: relative;
+    left: 100px;
+    transition: all ease 0.4s;
+}
+
+.icon.set.disable {
+    color: #7a7a7a !important;
+    pointer-events: none !important;
+}
+
+.icon.close {
+    display: none;
+}
+
+
+.cards {
+    width: calc(100vw - 150px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: auto;
+    position: absolute;
+    top: 10px;
+    left: 150px;
+}
+
+.thumbnail-img {
+    width: 130px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+.thumbnail-img.active {
+    width: 120px;
+    margin: 0 10px;
+    cursor: pointer;
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 5px;
+    transition: all ease 0.2s;
+}
+
+.display-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - 150px);
+    background-color: rgba(97, 97, 97, 0.322);
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    opacity: 0;
+    transition: all ease-in-out 1s;
+}
+
+.display-image img{
+    height: calc(100vh - 150px);
+    opacity: 0.5;
+    pointer-events: none;
+
+}
+
+.control-buttons {
+    position: fixed;
+    right: 50px;
+    bottom: 170px;
+    cursor: pointer;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.control-buttons.hide {
+    display: none;
+}
+
+.control-buttons .inactive {
+    pointer-events: none;
+}
+
+
+.drag-area{
+    border: 2px dashed #cecece;
+    height: 130px;
+    width: 110px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 0 20px;
+    transition: all ease 0.5s;
+    margin-left: 10px;
+  }
+  .drag-area.active{
+    border: 2px solid rgb(3, 3, 3);
+  }
+  .drag-area .icon{
+    font-size: 20px;
+    color: rgb(61, 41, 177);
+    margin-top: 10px;
+    border: none !important;
+  }
+  .drag-area header{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    color: rgb(56, 56, 56);
+  }
+  .drag-area button{
+    margin-bottom: 5px;
+    padding: 10px;
+    font-size: 12px;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    background: rgb(192, 192, 192);
+    color: #585858;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .drag-area img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+  }

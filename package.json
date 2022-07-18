@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/sherifhelmyzayed/product-media-viewer#readme",
   "dependencies": {
+    "gsap": "^3.10.4",
     "three": "^0.142.0"
   }
 }

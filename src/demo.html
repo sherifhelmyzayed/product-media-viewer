@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Media Viewer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<body>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "../node_modules/three/build/three.module.js",
+                "OrbitControls" : "../node_modules/three/examples/jsm/controls/OrbitControls.js",
+                "gsap" : "../node_modules/gsap/index.js"
+            }
+        }
+    </script>
+    <script defer type="module" src="index.js"></script>
+    <!-- <script defer type="module" src="./product-media-viewer/actionControl.js"></script> -->
+
+    <div class="viewer-button">
+        <div class="icon close">
+            <i class="fa-solid fa-xmark" id="closeBtn"></i>
+        </div>
+        <div class="icon open">
+            <i class="fa-solid fa-bars" id="openBtn"></i>
+        </div>
+    </div>
+    <div class="viewer-container">
+        <div class="drag-area">
+            <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+            <header>Drag & Drop to Upload File</header>
+            <button>Browse File</button>
+            <input type="file" hidden multiple>
+        </div>
+        <!-- <input type="file" id="input-image" accept="image/png, image/jpeg" multiple> -->
+        <div class="image-container">
+            <div class="cards">
+            </div>
+        </div>
+    </div>
+    <div class="display-image">
+        <img src="" alt="">
+    </div>
+    <div class="control-buttons">
+        <div class="icon view disable">
+            <i class="fa-solid fa-photo-film" id="viewBtn"></i>
+        </div>
+        <p class="icon-text">view</p>
+        <div class="icon set disable">
+            <i class="fa-solid fa-camera" id="setBtn"></i>
+        </div>
+        <p class="icon-text">set</p>
+    </div>
+
+
+
+</body>
+
+</html>
