@@ -52,9 +52,7 @@ export const imageContainer = (mediaCollection) => {
                 `)
                     const thumbnailImages = document.getElementsByClassName('thumbnail-img')
                     for (let i = 0; i < thumbnailImages.length; i++) {
-                        thumbnailImages[i].addEventListener('click', () => (
-                            thumbnailClick(mediaCollection))
-                        )
+                        thumbnailImages[i].addEventListener('click', () => (thumbnailClick()))
                     }
                     mediaCollection.setPair(
                         uniqueId, ''
@@ -68,33 +66,33 @@ export const imageContainer = (mediaCollection) => {
         dragText.textContent = "Drag & Drop to Upload File";
     }
 
+    const thumbnailClick = () => {
+        const thumbnailImages = document.getElementsByClassName('thumbnail-img')
+        const previewImage = document.querySelector('.display-image img')
+        const setBtnIcon = document.querySelector('.icon.set')
+        const viewBtnIcon = document.querySelector('.icon.view')
+        previewImage.setAttribute('src', event.target.getAttribute('src'))
+        for (let i = 0; i < thumbnailImages.length; i++) {
+            thumbnailImages[i].classList.remove('active')
+        }
+        event.target.classList.add('active')
+        const selectedID = parseInt(event.target.getAttribute('imageId'))
+        viewBtnIcon.classList.remove('disable')
+        setBtnIcon.classList.remove('disable')
+        viewBtnIcon.setAttribute('imageId', selectedID)
+        setBtnIcon.setAttribute('imageId', selectedID)
+        if (!mediaCollection.getPov(selectedID).pov) {
+            viewBtnIcon.classList.add('disable')
+        }
+    }
 
 }
 
-    /////////////////////////////////////////////////////////////////////
-    //////////////////// IMAGE  CONTAINER  ENDS  ////////////////////////
-    /////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+//////////////////// IMAGE  CONTAINER  ENDS  ////////////////////////
+/////////////////////////////////////////////////////////////////////
 
 
-export const thumbnailClick = (mediaCollection) => {
-    const thumbnailImages = document.getElementsByClassName('thumbnail-img')
-    const previewImage = document.querySelector('.display-image img')
-    const setBtnIcon = document.querySelector('.icon.set')
-    const viewBtnIcon = document.querySelector('.icon.view')
-    previewImage.setAttribute('src', event.target.getAttribute('src'))
-    for (let i = 0; i < thumbnailImages.length; i++) {
-        thumbnailImages[i].classList.remove('active')
-    }
-    event.target.classList.add('active')
-    const selectedID = parseInt(event.target.getAttribute('imageId'))
-    viewBtnIcon.classList.remove('disable')
-    setBtnIcon.classList.remove('disable')
-    viewBtnIcon.setAttribute('imageId', selectedID)
-    setBtnIcon.setAttribute('imageId', selectedID)
-    if (!mediaCollection.getPov(selectedID).pov) {
-        viewBtnIcon.classList.add('disable')
-    }
-}
 
 export const viewBtn = (mediaCollection, camera, controls) => {
     const selectedID = parseInt(document.querySelector('#viewBtn').parentElement.getAttribute('imageId'))
