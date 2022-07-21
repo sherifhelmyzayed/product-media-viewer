@@ -85,9 +85,9 @@ animate();
 //////////////////// THREEJS SCENE PREP ends ////////////////////////
 /////////////////////////////////////////////////////////////////////
 
-const mediaCollection = new pairCollection
+const mediaCollection = new pairCollection;
 
-imageContainer(mediaCollection)
+imageContainer(mediaCollection);
 
 
 
@@ -97,10 +97,10 @@ imageContainer(mediaCollection)
 
 
 // view button event listener
-document.querySelector('#viewBtn').addEventListener('click', () => (viewBtn(mediaCollection, camera, controls)))
+document.querySelector('#viewBtn').addEventListener('click', () => (viewBtn(mediaCollection, camera, controls)));
 
 // set button event listener
-document.querySelector('#setBtn').addEventListener('click', () => (setBtn(mediaCollection, camera)))
+document.querySelector('#setBtn').addEventListener('click', () => (setBtn(mediaCollection, camera)));
 
 
 /////////////////////////////////////////////////////////////////////

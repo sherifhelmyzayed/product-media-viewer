@@ -46,17 +46,15 @@ export const imageContainer = (mediaCollection) => {
             try {
                 fileReader.onload = () => {
                     let fileURL = fileReader.result; //passing user file source in fileURL variable
-                    let uniqueId = Math.floor(Math.random() * 10000000)
+                    let uniqueId = Math.floor(Math.random() * 10000000);
                     imageContainer.getElementsByClassName('cards')[0].insertAdjacentHTML('beforeend', `
                 <img src="${fileURL}" alt="image" imageId="${uniqueId}" class="thumbnail-img" img>
-                `)
-                    const thumbnailImages = document.getElementsByClassName('thumbnail-img')
+                `);
+                    const thumbnailImages = document.getElementsByClassName('thumbnail-img');
                     for (let i = 0; i < thumbnailImages.length; i++) {
-                        thumbnailImages[i].addEventListener('click', () => (thumbnailClick()))
+                        thumbnailImages[i].addEventListener('click', () => (thumbnailClick()));
                     }
-                    mediaCollection.setPair(
-                        uniqueId, ''
-                    )
+                    mediaCollection.setPair(uniqueId, '')
                 }
                 fileReader.readAsDataURL(file[i]);
             } catch {
@@ -67,20 +65,20 @@ export const imageContainer = (mediaCollection) => {
     }
 
     const thumbnailClick = () => {
-        const thumbnailImages = document.getElementsByClassName('thumbnail-img')
-        const previewImage = document.querySelector('.display-image img')
-        const setBtnIcon = document.querySelector('.icon.set')
-        const viewBtnIcon = document.querySelector('.icon.view')
-        previewImage.setAttribute('src', event.target.getAttribute('src'))
+        const thumbnailImages = document.getElementsByClassName('thumbnail-img');
+        const previewImage = document.querySelector('.display-image img');
+        const setBtnIcon = document.querySelector('.icon.set');
+        const viewBtnIcon = document.querySelector('.icon.view');
+        previewImage.setAttribute('src', event.target.getAttribute('src'));
         for (let i = 0; i < thumbnailImages.length; i++) {
-            thumbnailImages[i].classList.remove('active')
+            thumbnailImages[i].classList.remove('active');
         }
-        event.target.classList.add('active')
-        const selectedID = parseInt(event.target.getAttribute('imageId'))
-        viewBtnIcon.classList.remove('disable')
-        setBtnIcon.classList.remove('disable')
-        viewBtnIcon.setAttribute('imageId', selectedID)
-        setBtnIcon.setAttribute('imageId', selectedID)
+        event.target.classList.add('active');
+        const selectedID = parseInt(event.target.getAttribute('imageId'));
+        viewBtnIcon.classList.remove('disable');
+        setBtnIcon.classList.remove('disable');
+        viewBtnIcon.setAttribute('imageId', selectedID);
+        setBtnIcon.setAttribute('imageId', selectedID);
         if (!mediaCollection.getPov(selectedID).pov) {
             viewBtnIcon.classList.add('disable')
         }
@@ -95,8 +93,8 @@ export const imageContainer = (mediaCollection) => {
 
 
 export const viewBtn = (mediaCollection, camera, controls) => {
-    const selectedID = parseInt(document.querySelector('#viewBtn').parentElement.getAttribute('imageId'))
-    let newCamPos = mediaCollection.getPov(selectedID).pov
+    const selectedID = parseInt(document.querySelector('#viewBtn').parentElement.getAttribute('imageId'));
+    let newCamPos = mediaCollection.getPov(selectedID).pov;
     if (selectedID && newCamPos) {
         gsap.to(camera.position, {
             duration: 1,
@@ -113,9 +111,9 @@ export const viewBtn = (mediaCollection, camera, controls) => {
     }
 }
 export const setBtn = (mediaCollection, camera) => {
-    const selectedID = parseInt(document.querySelector('#setBtn').parentElement.getAttribute('imageId'))
-    const viewBtnIcon = document.querySelector('.icon.view')
-    viewBtnIcon.classList.remove('disable')
+    const selectedID = parseInt(document.querySelector('#setBtn').parentElement.getAttribute('imageId'));
+    const viewBtnIcon = document.querySelector('.icon.view');
+    viewBtnIcon.classList.remove('disable');
     mediaCollection.setPair(
         selectedID,
         {
