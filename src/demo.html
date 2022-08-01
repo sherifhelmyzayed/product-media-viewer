@@ -27,21 +27,14 @@
     <!-- <script defer type="module" src="./product-media-viewer/actionControl.js"></script> -->
 
 
-    <div class="viewer-container">
+
+    <div class="display-image">
+        <img src="" alt="">
         <div class="drag-area">
             <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
             <header>Drag & Drop to Upload File</header>
-            <button>Browse File</button>
             <input type="file" hidden multiple>
         </div>
-        <!-- <input type="file" id="input-image" accept="image/png, image/jpeg" multiple> -->
-        <div class="image-container">
-            <div class="cards">
-            </div>
-        </div>
-    </div>
-    <div class="display-image">
-        <img src="" alt="">
         <div class="control-buttons">
             <div class="icon view disable">
                 <i class="fa-solid fa-photo-film" id="viewBtn"></i>
@@ -50,6 +43,14 @@
             <div class="icon set disable">
                 <i class="fa-solid fa-camera" id="setBtn"></i>
                 <p class="icon-text">set</p>
+            </div>
+        </div>
+        <div class="toggle-buttons">
+            <div class="icon left ">
+                <i class="fa-solid fa-angle-left" id="leftBtn"></i>
+            </div>
+            <div class="icon right ">
+                <i class="fa-solid fa-angle-right" id="rightBtn"></i>
             </div>
         </div>
     </div>

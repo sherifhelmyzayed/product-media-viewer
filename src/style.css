@@ -22,26 +22,7 @@ canvas {
     z-index: 5;
 }
 
-.viewer-container {
-    position: fixed;
-    bottom: 0;
-    height: 150px;
-    width: 100vw;
-    background-color: aliceblue;
-    display: flex;
-    align-items: center;
-    transition: bottom ease 0.5s;
-}
 
-.image-container {
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-}
 
 .icon {
     font-size: 20px;
@@ -100,18 +81,14 @@ canvas {
     display: none;
 }
 
-
-.cards {
-    width: calc(100vw - 150px);
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow-x: auto;
-    position: absolute;
-    top: 10px;
-    left: 150px;
+.icon.left {
+    border: none !important;
 }
+
+.icon.right {
+    border: none !important;
+}
+
 
 .thumbnail-img {
     width: 130px;
@@ -149,7 +126,7 @@ canvas {
     width: auto;
     height: auto;
     pointer-events: none;
-
+    z-index: 0;
 }
 
 .control-buttons {
@@ -162,24 +139,39 @@ canvas {
     align-content: center;
 }
 
+.toggle-buttons {
+    position: absolute;
+    bottom: 0px;
+    cursor: pointer;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    opacity: 0;
+}
+
 
 
 .drag-area{
+    background-color: aliceblue;
     border: 2px dashed #cecece;
-    height: 130px;
-    width: 110px;
+    height: 196px;
+    width: 156px;
     border-radius: 5px;
+    position: absolute;
+    left: -10px;
+    top: 0;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     flex-direction: column;
     padding: 0 20px;
     transition: all ease 0.5s;
     margin-left: 10px;
+    z-index: 1;
+    opacity: 1;
   }
-  .drag-area.active{
-    border: 2px solid rgb(3, 3, 3);
-  }
+
   .drag-area .icon{
     font-size: 20px;
     color: rgb(61, 41, 177);
@@ -192,22 +184,4 @@ canvas {
     font-size: 16px;
     font-weight: 500;
     color: rgb(56, 56, 56);
-  }
-  .drag-area button{
-    margin-bottom: 5px;
-    padding: 10px;
-    font-size: 12px;
-    font-weight: 500;
-    border: none;
-    outline: none;
-    background: rgb(192, 192, 192);
-    color: #585858;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  .drag-area img{
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    border-radius: 5px;
   }

@@ -2,7 +2,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'OrbitControls'
 import pairCollection from './product-media-viewer/index.js'
-import { imageContainer, setBtn, viewBtn } from './product-media-viewer/actionControl.js'
+import ActionControlClass from './product-media-viewer/actionControl.js'
 
 
 
@@ -86,8 +86,31 @@ animate();
 /////////////////////////////////////////////////////////////////////
 
 const mediaCollection = new pairCollection;
+// imageContainer(mediaCollection);
 
-imageContainer(mediaCollection);
+const actionControls = new ActionControlClass;
+
+
+const dropArea = document.querySelector(".drag-area");
+const input = dropArea.querySelector("input");
+
+input.addEventListener("change", function () {
+    actionControls.file = input.files;
+    actionControls.addFile(mediaCollection);
+});
+
+dropArea.addEventListener("dragover", (event) => {
+    dropArea.style.opacity = 1
+    event.preventDefault();
+});
+
+dropArea.addEventListener("drop", (event) => {
+    event.preventDefault();
+    actionControls.file = event.dataTransfer.files;
+    actionControls.addFile(mediaCollection);
+    dropArea.style.opacity = 0
+
+});
 
 
 
@@ -97,10 +120,24 @@ imageContainer(mediaCollection);
 
 
 // view button event listener
-document.querySelector('#viewBtn').addEventListener('click', () => (viewBtn(mediaCollection, camera, controls)));
+document.querySelector('#viewBtn').addEventListener('click', () => (actionControls.viewBtn(mediaCollection, camera, controls)));
 
 // set button event listener
-document.querySelector('#setBtn').addEventListener('click', () => (setBtn(mediaCollection, camera)));
+document.querySelector('#setBtn').addEventListener('click', () => {actionControls.setBtn(mediaCollection, camera)});
+
+// next image button event listener
+document.querySelector('#rightBtn').addEventListener('click', () => {actionControls.nextImage(mediaCollection)});
+
+// prev image button listener
+document.querySelector('#leftBtn').addEventListener('click', () => {actionControls.prevImage(mediaCollection)});
+
+
+
+
+
+// () => {
+//     ActionControlClass.setBtn(mediaCollection, camera)
+// }
 
 
 /////////////////////////////////////////////////////////////////////
